@@ -1,0 +1,25 @@
+{
+  "landing": {
+    "selectLanguage": "Select your language",
+    "chooseTour": "Choose your tour",
+    "fastTour": "Fast Tour",
+    "fullTour": "Full Tour",
+    "minutes": "{{count}} min",
+    "startTour": "Start Tour"
+  },
+  "player": {
+    "stepOf": "Step {{current}} of {{total}}",
+    "skip": "Skip",
+    "next": "Next",
+    "back": "Back",
+    "playAudio": "Play audio",
+    "pauseAudio": "Pause audio",
+    "tourComplete": "Tour Complete!",
+    "thankYou": "Thank you for visiting",
+    "directions": "Directions to next artwork"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong. Please try again."
+  }
+}

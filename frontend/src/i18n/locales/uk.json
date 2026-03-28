@@ -1,0 +1,25 @@
+{
+  "landing": {
+    "selectLanguage": "Оберіть мову",
+    "chooseTour": "Оберіть тур",
+    "fastTour": "Швидкий тур",
+    "fullTour": "Повний тур",
+    "minutes": "{{count}} хв",
+    "startTour": "Почати тур"
+  },
+  "player": {
+    "stepOf": "Крок {{current}} з {{total}}",
+    "skip": "Пропустити",
+    "next": "Далі",
+    "back": "Назад",
+    "playAudio": "Відтворити аудіо",
+    "pauseAudio": "Пауза",
+    "tourComplete": "Тур завершено!",
+    "thankYou": "Дякуємо за відвідування",
+    "directions": "Напрямок до наступного твору"
+  },
+  "common": {
+    "loading": "Завантаження...",
+    "error": "Щось пішло не так. Спробуйте ще раз."
+  }
+}

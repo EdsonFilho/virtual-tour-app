@@ -1,0 +1,25 @@
+{
+  "landing": {
+    "selectLanguage": "Selecione seu idioma",
+    "chooseTour": "Escolha seu passeio",
+    "fastTour": "Passeio Rápido",
+    "fullTour": "Passeio Completo",
+    "minutes": "{{count}} min",
+    "startTour": "Iniciar Passeio"
+  },
+  "player": {
+    "stepOf": "Passo {{current}} de {{total}}",
+    "skip": "Pular",
+    "next": "Próximo",
+    "back": "Voltar",
+    "playAudio": "Reproduzir áudio",
+    "pauseAudio": "Pausar áudio",
+    "tourComplete": "Passeio Concluído!",
+    "thankYou": "Obrigado por visitar",
+    "directions": "Direções para a próxima obra"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Algo deu errado. Por favor, tente novamente."
+  }
+}
