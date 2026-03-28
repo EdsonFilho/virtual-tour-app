@@ -26,7 +26,7 @@ Multi-museum SaaS — a single deployment serves all museums via path-based rout
 | i18n | react-i18next | Mature, lazy-loads language bundles |
 | HTTP/cache | TanStack Query | Loading states, caching, deduplication |
 | Frontend hosting | Azure Static Web Apps (Standard) | Global CDN, HTTPS, SWA auth, linked backend |
-| Backend | Azure Functions v4 (Node.js 20, TypeScript) | Serverless, scales to zero |
+| Backend | Azure Functions v4 (Node.js 24, TypeScript) | Serverless, scales to zero |
 | Database | Azure Cosmos DB (serverless, Core API) | Flexible NoSQL, pay-per-RU |
 | Media storage | Azure Blob Storage (direct, no CDN) | CDN removed for cost — add Front Door for production |
 | TTS | Azure Cognitive Services Speech | Native Azure, multi-language neural voices |
@@ -237,7 +237,7 @@ virtual-tour-app/
 ## Local Development
 
 ### Prerequisites
-- Node.js 20 (use `nvm use 20` — v25 is not supported by Azure Functions v4)
+- Node.js 24 (use `nvm use 20` — v25 is not supported by Azure Functions v4)
 - Azure Functions Core Tools v4
 - Azurite (local storage emulator): `npm install -g azurite`
 

@@ -11,7 +11,7 @@ Browser / Phone
     └── Azure Static Web Apps (React SPA)
             ├── /tour/*     Public tour player
             └── /admin/*    Admin panel (Azure AD protected)
-                    └── Azure Functions API (Node.js 20)
+                    └── Azure Functions API (Node.js 24)
                             ├── Azure Cosmos DB       (content)
                             ├── Azure Blob Storage    (media)
                             └── Azure Cognitive Services Speech (TTS)
@@ -32,7 +32,7 @@ virtual-tour-app/
 ## Local Development
 
 ### Prerequisites
-- Node.js 20 (`nvm use 20`)
+- Node.js 24 (`nvm use 20`)
 - [Azure Functions Core Tools v4](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local)
 - Azurite: `npm install -g azurite`
 
