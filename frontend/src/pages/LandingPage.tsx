@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMuseum } from '@/hooks/useTour'
@@ -13,8 +13,28 @@ export default function LandingPage() {
 
   const { data: museum, isLoading, error } = useMuseum(museumSlug ?? '')
 
-  const [selectedLang, setSelectedLang] = useState(i18n.language)
+  const [selectedLang, setSelectedLang] = useState('pt')
   const [selectedTour, setSelectedTour] = useState<TourType | null>(null)
+
+  useEffect(() => {
+    if (!museum) return
+    const available = museum.languages
+    // Try each browser language in order of preference
+    const browserLangs = navigator.languages ?? [navigator.language]
+    for (const bl of browserLangs) {
+      // Exact match (e.g. 'pt') or prefix match (e.g. 'pt-BR' → 'pt')
+      const match = available.find(l => l === bl || bl.startsWith(l + '-'))
+      if (match) {
+        setSelectedLang(match)
+        i18n.changeLanguage(match)
+        return
+      }
+    }
+    // Fall back to Portuguese if available, otherwise museum's first language
+    const fallback = available.includes('pt') ? 'pt' : available[0]
+    setSelectedLang(fallback)
+    i18n.changeLanguage(fallback)
+  }, [museum])
 
   function handleLangChange(lang: string) {
     setSelectedLang(lang)
