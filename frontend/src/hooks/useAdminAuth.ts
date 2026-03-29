@@ -25,6 +25,14 @@ export function useAdminAuth(): AuthState {
 
   useEffect(() => {
     async function load() {
+      // Local dev bypass — backend also has DEV_ADMIN_BYPASS=true
+      if (import.meta.env.DEV) {
+        const adminUser = await adminGetMe().catch(() => null)
+        const devUser: SwaUser = { userId: 'dev', userDetails: 'dev@local', identityProvider: 'dev' }
+        setState({ user: devUser, adminUser, isAdmin: true, isLoading: false })
+        return
+      }
+
       try {
         // SWA built-in endpoint
         const meRes = await fetch('/.auth/me')

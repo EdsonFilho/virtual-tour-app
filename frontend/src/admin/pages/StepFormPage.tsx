@@ -141,7 +141,7 @@ export default function StepFormPage() {
               className="text-sm border border-gray-300 rounded px-2 py-1"
             >
               <option value="">+ Add language</option>
-              {['en', 'pt', 'es', 'uk'].filter(l => !form.content[l]).map(l => (
+              {['en', 'pt', 'es', 'uk', 'ja'].filter(l => !form.content[l]).map(l => (
                 <option key={l} value={l}>{l.toUpperCase()}</option>
               ))}
             </select>
