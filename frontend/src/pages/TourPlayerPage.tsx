@@ -74,7 +74,7 @@ export default function TourPlayerPage() {
           onClick={() => navigate(`/tour/${museumSlug}`)}
           className="mt-4 px-6 py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-700 transition-colors"
         >
-          Back to museum
+          {t('player.backToMuseum')}
         </button>
       </div>
     )

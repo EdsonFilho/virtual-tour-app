@@ -16,7 +16,8 @@
     "pauseAudio": "音声を一時停止",
     "tourComplete": "ツアー終了！",
     "thankYou": "ご来館ありがとうございました",
-    "directions": "次の作品への道順"
+    "directions": "次の作品への道順",
+    "backToMuseum": "美術館に戻る"
   },
   "common": {
     "loading": "読み込み中...",

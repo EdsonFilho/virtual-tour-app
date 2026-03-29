@@ -16,7 +16,8 @@
     "pauseAudio": "Pause audio",
     "tourComplete": "Tour Complete!",
     "thankYou": "Thank you for visiting",
-    "directions": "Directions to next artwork"
+    "directions": "Directions to next artwork",
+    "backToMuseum": "Back to museum"
   },
   "common": {
     "loading": "Loading...",

@@ -45,9 +45,9 @@ export default function LanguageSelector({ languages, selected, onChange }: Prop
                 ? 'bg-gray-900 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
+          title={LANGUAGE_LABELS[lang] ?? lang.toUpperCase()}
           >
-            <span className="mr-1">{FLAG_EMOJIS[lang] ?? '🌐'}</span>
-            {LANGUAGE_LABELS[lang] ?? lang.toUpperCase()}
+            {FLAG_EMOJIS[lang] ?? '🌐'}
           </button>
         ))}
       </div>

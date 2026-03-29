@@ -16,7 +16,8 @@
     "pauseAudio": "Pausar audio",
     "tourComplete": "¡Recorrido Completo!",
     "thankYou": "Gracias por visitar",
-    "directions": "Indicaciones a la siguiente obra"
+    "directions": "Indicaciones a la siguiente obra",
+    "backToMuseum": "Volver al museo"
   },
   "common": {
     "loading": "Cargando...",
