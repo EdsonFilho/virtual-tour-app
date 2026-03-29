@@ -1,6 +1,10 @@
 {
   "globalHeaders": {
-    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.blob.core.windows.net https://placehold.co; media-src 'self' blob: https://*.blob.core.windows.net; connect-src 'self' https://*.azure.com https://*.cognitiveservices.azure.com https://*.blob.core.windows.net"
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.blob.core.windows.net https://placehold.co; media-src 'self' blob: https://*.blob.core.windows.net; connect-src 'self' https://*.azure.com https://*.cognitiveservices.azure.com https://*.blob.core.windows.net",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
   },
   "routes": [
     {

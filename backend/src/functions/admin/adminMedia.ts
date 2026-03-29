@@ -24,8 +24,26 @@ app.http('adminUploadMedia', {
       return { status: 400, jsonBody: { error: 'museumId, type, and file are required' } }
     }
 
-    const blobPath = `${museumId}/${type}s/${randomUUID()}-${filename}`
-    const cdnUrl = await uploadBuffer(blobPath, buffer, mimeType ?? 'application/octet-stream')
+    const MAX_SIZE = 50 * 1024 * 1024 // 50MB
+    if (buffer.length > MAX_SIZE) {
+      return { status: 413, jsonBody: { error: 'File too large. Maximum size is 50MB.' } }
+    }
+
+    const ALLOWED_MIME_TYPES: Record<string, string[]> = {
+      image: ['image/jpeg', 'image/png', 'image/webp'],
+      audio: ['audio/mpeg', 'audio/mp3', 'audio/wav'],
+    }
+    const allowed = ALLOWED_MIME_TYPES[type]
+    if (!allowed) {
+      return { status: 400, jsonBody: { error: 'Invalid type. Must be image or audio.' } }
+    }
+    if (!mimeType || !allowed.includes(mimeType)) {
+      return { status: 415, jsonBody: { error: `Invalid file type. Allowed: ${allowed.join(', ')}` } }
+    }
+
+    const safeFilename = filename.replace(/[^a-zA-Z0-9._-]/g, '_')
+    const blobPath = `${museumId}/${type}s/${randomUUID()}-${safeFilename}`
+    const cdnUrl = await uploadBuffer(blobPath, buffer, mimeType)
 
     return { status: 200, jsonBody: { cdnUrl, blobPath } }
   },

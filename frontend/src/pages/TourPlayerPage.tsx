@@ -13,7 +13,9 @@ export default function TourPlayerPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const lang = (searchParams.get('lang') ?? 'en') as Language
+  const SUPPORTED_LANGS: Language[] = ['en', 'pt', 'es', 'uk', 'ja']
+  const rawLang = searchParams.get('lang') ?? 'en'
+  const lang: Language = SUPPORTED_LANGS.includes(rawLang as Language) ? (rawLang as Language) : 'en'
   const { data: tour, isLoading, error } = useTour(museumSlug ?? '', tourType ?? '')
 
   // Track skipped step IDs in session storage

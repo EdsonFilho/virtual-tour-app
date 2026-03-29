@@ -25,7 +25,10 @@ export function requireAdmin(req: HttpRequest): HttpResponseInit | null {
     return { status: 401, jsonBody: { error: 'Unauthorized' } }
   }
   const allowedIds = (process.env.ADMIN_USER_IDS ?? '').split(',').map(s => s.trim()).filter(Boolean)
-  if (allowedIds.length > 0 && !allowedIds.includes(principal.userId)) {
+  if (allowedIds.length === 0) {
+    return { status: 403, jsonBody: { error: 'Admin access is not configured' } }
+  }
+  if (!allowedIds.includes(principal.userId)) {
     return { status: 403, jsonBody: { error: 'Forbidden' } }
   }
   return null
