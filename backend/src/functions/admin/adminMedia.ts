@@ -24,7 +24,6 @@ app.http('adminUploadMedia', {
       return { status: 400, jsonBody: { error: 'museumId, type, and file are required' } }
     }
 
-    const ext = filename.split('.').pop() ?? 'bin'
     const blobPath = `${museumId}/${type}s/${randomUUID()}-${filename}`
     const cdnUrl = await uploadBuffer(blobPath, buffer, mimeType ?? 'application/octet-stream')
 
@@ -71,6 +70,6 @@ function parseMultipart(req: HttpRequest, contentType: string): Promise<{
     busboy.on('finish', () => resolve({ ...fields, buffer, filename, mimeType }))
     busboy.on('error', reject)
 
-    req.arrayBuffer().then(ab => busboy.write(Buffer.from(ab)))
+    req.arrayBuffer().then(ab => busboy.end(Buffer.from(ab)))
   })
 }
