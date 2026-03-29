@@ -70,7 +70,7 @@ export default function AdminDashboardPage() {
                   Edit
                 </Link>
                 <Link
-                  to={`/admin/museums/${museum.id}/steps/new`}
+                  to={`/admin/museums/${museum.id}/steps`}
                   className="px-3 py-1.5 text-sm border border-gray-300 rounded hover:bg-gray-50"
                 >
                   Steps

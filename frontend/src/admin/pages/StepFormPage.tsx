@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams, Link, useLocation } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { adminListSteps, adminSaveStep, adminDeleteStep } from '@/admin/api'
+import { adminListSteps, adminSaveStep } from '@/admin/api'
 import MediaUpload from '@/admin/components/MediaUpload'
 import type { StepWritePayload } from '@/admin/types'
 
@@ -14,8 +14,6 @@ export default function StepFormPage() {
   const { museumId, stepId } = useParams<{ museumId: string; stepId: string }>()
   const isEdit = !!stepId
   const navigate = useNavigate()
-  const location = useLocation()
-  const justSaved = location.state?.saved === true
   const qc = useQueryClient()
   const [form, setForm] = useState<StepWritePayload>(empty(museumId!))
   const [error, setError] = useState<string | null>(null)
@@ -37,7 +35,7 @@ export default function StepFormPage() {
     mutationFn: (data: StepWritePayload) => adminSaveStep(museumId!, data),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['admin', 'steps', museumId] })
-      navigate(`/admin/museums/${museumId}/steps/new`, { state: { saved: true } })
+      navigate(`/admin/museums/${museumId}/steps`, { state: { saved: true } })
     },
     onError: () => setError('Failed to save step.'),
   })
@@ -73,57 +71,12 @@ export default function StepFormPage() {
     saveMutation.mutate(form)
   }
 
-  const deleteMutation = useMutation({
-    mutationFn: adminDeleteStep,
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'steps', museumId] }),
-  })
-
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">Steps</h1>
-      <p className="text-gray-500 text-sm mb-4">{museumId}</p>
-
-      {justSaved && (
-        <div className="mb-6 px-4 py-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
-          Step saved successfully.
-        </div>
-      )}
-
-      {steps && steps.length > 0 && (
-        <div className="mb-8">
-          <div className="space-y-1">
-            {steps.map(step => (
-              <div key={step.id} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-2.5">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs text-gray-400 font-mono w-4">{step.order}</span>
-                  <span className="text-sm font-medium text-gray-800">{step.content?.en?.title ?? step.id}</span>
-                  <span className="text-xs text-gray-400 font-mono">{step.id}</span>
-                </div>
-                <div className="flex gap-2">
-                  <Link
-                    to={`/admin/museums/${museumId}/steps/${step.id}/edit`}
-                    className="text-xs text-blue-600 hover:underline"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => deleteMutation.mutate(step.id)}
-                    disabled={deleteMutation.isPending}
-                    className="text-xs text-red-500 hover:underline disabled:opacity-50"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">
+      <h1 className="text-2xl font-bold text-gray-900 mb-6">
         {isEdit ? 'Edit Step' : 'New Step'}
-      </h2>
+        <span className="text-gray-400 text-base font-normal ml-2">— {museumId}</span>
+      </h1>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-3 gap-4">
@@ -240,7 +193,7 @@ export default function StepFormPage() {
           </button>
           <button
             type="button"
-            onClick={() => navigate('/admin')}
+            onClick={() => navigate(`/admin/museums/${museumId}/steps`)}
             className="px-5 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50"
           >
             Cancel

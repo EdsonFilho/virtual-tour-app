@@ -9,6 +9,7 @@ import AdminDashboardPage from '@/admin/pages/AdminDashboardPage'
 import MuseumFormPage from '@/admin/pages/MuseumFormPage'
 import TourFormPage from '@/admin/pages/TourFormPage'
 import StepFormPage from '@/admin/pages/StepFormPage'
+import StepListPage from '@/admin/pages/StepListPage'
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="museums/new" element={<MuseumFormPage />} />
         <Route path="museums/:museumId/edit" element={<MuseumFormPage />} />
         <Route path="museums/:museumId/tours" element={<TourFormPage />} />
+        <Route path="museums/:museumId/steps" element={<StepListPage />} />
         <Route path="museums/:museumId/steps/new" element={<StepFormPage />} />
         <Route path="museums/:museumId/steps/:stepId/edit" element={<StepFormPage />} />
       </Route>
