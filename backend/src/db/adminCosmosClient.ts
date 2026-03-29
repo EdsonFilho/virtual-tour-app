@@ -44,11 +44,11 @@ export async function deleteTour(id: string) {
 export async function listStepsByMuseum(museumId: string) {
   const { resources } = await getContainer('steps').items
     .query({
-      query: 'SELECT * FROM c WHERE c.museumId = @museumId ORDER BY c.order',
+      query: 'SELECT * FROM c WHERE c.museumId = @museumId',
       parameters: [{ name: '@museumId', value: museumId }],
     })
     .fetchAll()
-  return resources
+  return resources.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
 }
 
 export async function upsertStep(doc: object) {
