@@ -11,6 +11,12 @@ export default function TourFormPage() {
   const qc = useQueryClient()
   const [saved, setSaved] = useState<string | null>(null)
 
+  function handleSaved(key: string) {
+    setSaved(key)
+    setTimeout(() => setSaved(null), 3000)
+    qc.invalidateQueries({ queryKey: ['admin', 'tours', museumId] })
+  }
+
   const { data: tours, isLoading: toursLoading } = useQuery({
     queryKey: ['admin', 'tours', museumId],
     queryFn: () => adminListTours(museumId!),
@@ -39,7 +45,7 @@ export default function TourFormPage() {
               initial={existing}
               allSteps={steps ?? []}
               savedKey={saved}
-              onSaved={key => { setSaved(key); qc.invalidateQueries({ queryKey: ['admin', 'tours', museumId] }) }}
+              onSaved={handleSaved}
               onDeleted={() => qc.invalidateQueries({ queryKey: ['admin', 'tours', museumId] })}
             />
           )
@@ -142,7 +148,11 @@ function TourEditor({
           >
             {saveMutation.isPending ? 'Saving...' : 'Save'}
           </button>
-          {savedKey === type && <span className="text-sm text-green-600">Saved!</span>}
+          {savedKey === type && (
+            <span className="px-3 py-1.5 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
+              Tour saved successfully.
+            </span>
+          )}
         </div>
       </div>
     </div>

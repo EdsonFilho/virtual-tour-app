@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { adminListMuseums, adminDeleteMuseum } from '@/admin/api'
 
 export default function AdminDashboardPage() {
   const qc = useQueryClient()
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
+  const location = useLocation()
+  const justSaved = location.state?.saved === true
 
   const { data: museums, isLoading, error } = useQuery({
     queryKey: ['admin', 'museums'],
@@ -25,6 +27,12 @@ export default function AdminDashboardPage() {
 
   return (
     <div>
+      {justSaved && (
+        <div className="mb-6 px-4 py-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
+          Museum saved successfully.
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Museums</h1>
         <Link

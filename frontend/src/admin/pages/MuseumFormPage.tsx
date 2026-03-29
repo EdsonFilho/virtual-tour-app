@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { adminListMuseums, adminSaveMuseum } from '@/admin/api'
 import MediaUpload from '@/admin/components/MediaUpload'
@@ -15,6 +15,8 @@ export default function MuseumFormPage() {
   const { museumId } = useParams<{ museumId: string }>()
   const isEdit = !!museumId
   const navigate = useNavigate()
+  const location = useLocation()
+  const justSaved = location.state?.saved === true
   const qc = useQueryClient()
   const [form, setForm] = useState<MuseumWritePayload>(empty)
   const [error, setError] = useState<string | null>(null)
@@ -36,7 +38,7 @@ export default function MuseumFormPage() {
     mutationFn: adminSaveMuseum,
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['admin', 'museums'] })
-      navigate('/admin')
+      navigate('/admin', { state: { saved: true } })
     },
     onError: () => setError('Failed to save museum. Please try again.'),
   })
@@ -62,6 +64,12 @@ export default function MuseumFormPage() {
 
   return (
     <div className="max-w-2xl">
+      {justSaved && (
+        <div className="mb-6 px-4 py-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
+          Museum saved successfully.
+        </div>
+      )}
+
       <h1 className="text-2xl font-bold text-gray-900 mb-6">
         {isEdit ? 'Edit Museum' : 'New Museum'}
       </h1>
