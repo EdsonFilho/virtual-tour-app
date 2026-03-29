@@ -35,6 +35,15 @@ export async function getStepById(stepId: string) {
   return resource ?? null
 }
 
+export async function updateStepAudioUrl(stepId: string, lang: string, audioUrl: string) {
+  const container = getContainer('steps')
+  const { resource: step } = await container.item(stepId, stepId).read()
+  if (!step) return
+  step.content = step.content ?? {}
+  step.content[lang] = { ...step.content[lang], audioUrl }
+  await container.items.upsert(step)
+}
+
 export async function getStepsByIds(stepIds: string[]) {
   if (stepIds.length === 0) return []
   const container = getContainer('steps')

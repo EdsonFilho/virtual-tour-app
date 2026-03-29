@@ -1,6 +1,6 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from '@azure/functions'
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk'
-import { getStepById } from '../db/cosmosClient'
+import { getStepById, updateStepAudioUrl } from '../db/cosmosClient'
 import { blobExists, uploadBuffer, buildCdnUrl } from '../storage/blobClient'
 
 app.http('generateTTS', {
@@ -42,6 +42,8 @@ app.http('generateTTS', {
     const audioBuffer = await synthesizeSpeech(content.description, lang)
 
     const cdnUrl = await uploadBuffer(blobPath, audioBuffer, 'audio/mpeg')
+
+    await updateStepAudioUrl(stepId, lang, cdnUrl)
 
     return { status: 200, jsonBody: { audioUrl: cdnUrl } }
   },
