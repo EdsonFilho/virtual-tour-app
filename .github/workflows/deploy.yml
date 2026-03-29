@@ -38,3 +38,4 @@ jobs:
           app-name: func-virtualtour
           package: backend
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          app-settings-json: '[{"name":"WEBSITE_NODE_DEFAULT_VERSION","value":"~20"}]'
