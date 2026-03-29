@@ -12,6 +12,18 @@ const LANGUAGE_LABELS: Record<string, string> = {
   uk: 'Українська',
 }
 
+const FLAG_EMOJIS: Record<string, string> = {
+  en: '🇬🇧',
+  pt: '🇧🇷',
+  es: '🇪🇸',
+  fr: '🇫🇷',
+  de: '🇩🇪',
+  it: '🇮🇹',
+  zh: '🇨🇳',
+  ja: '🇯🇵',
+  uk: '🇺🇦',
+}
+
 interface Props {
   languages: string[]
   selected: string
@@ -34,6 +46,7 @@ export default function LanguageSelector({ languages, selected, onChange }: Prop
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
+            <span className="mr-1">{FLAG_EMOJIS[lang] ?? '🌐'}</span>
             {LANGUAGE_LABELS[lang] ?? lang.toUpperCase()}
           </button>
         ))}

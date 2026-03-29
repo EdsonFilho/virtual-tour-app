@@ -53,6 +53,7 @@ SWA intercepts requests containing `admin` in the path and returns 404 before fo
 | `pt` | Portuguese | `pt-BR-FranciscaNeural` |
 | `es` | Spanish | `es-ES-ElviraNeural` |
 | `uk` | Ukrainian | `uk-UA-PolinaNeural` |
+| `ja` | Japanese | `ja-JP-NanamiNeural` |
 
 Each museum defines its own `languages` array — visitors only see languages that museum supports.
 

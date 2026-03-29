@@ -15,7 +15,7 @@ app.http('generateTTS', {
       return { status: 400, jsonBody: { error: 'stepId and lang are required' } }
     }
 
-    const SUPPORTED_LANGS = ['en', 'pt', 'es', 'uk']
+    const SUPPORTED_LANGS = ['en', 'pt', 'es', 'uk', 'ja']
     if (!SUPPORTED_LANGS.includes(lang)) {
       return { status: 400, jsonBody: { error: 'Unsupported language' } }
     }
@@ -52,6 +52,7 @@ const VOICE_MAP: Record<string, string> = {
   pt: 'pt-BR-FranciscaNeural',
   es: 'es-ES-ElviraNeural',
   uk: 'uk-UA-PolinaNeural',
+  ja: 'ja-JP-NanamiNeural',
 }
 
 function synthesizeSpeech(text: string, lang: string): Promise<Buffer> {

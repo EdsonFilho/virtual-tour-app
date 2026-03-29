@@ -39,7 +39,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         }
         { name: 'FUNCTIONS_EXTENSION_VERSION', value: '~4' }
         { name: 'FUNCTIONS_WORKER_RUNTIME', value: 'node' }
-        { name: 'WEBSITE_NODE_DEFAULT_VERSION', value: '~24' }
+        { name: 'WEBSITE_NODE_DEFAULT_VERSION', value: '~20' }
         { name: 'COSMOS_CONNECTION_STRING', value: cosmosConnectionString }
         { name: 'COSMOS_DATABASE_NAME', value: 'virtual-tour' }
         { name: 'BLOB_CONNECTION_STRING', value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${storageAccount.listKeys().keys[0].value}' }
